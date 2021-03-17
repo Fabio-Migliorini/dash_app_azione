@@ -4,7 +4,8 @@ import dash_html_components as html
 import plotly.graph_objs as go
 import plotly.express as px
 import pandas as pd
-
+import numpy as np
+# add numpy to the requirements
 
 # assigns colors
 colors = {
@@ -96,6 +97,41 @@ app.layout = html.Div(
                 ),
             ],
             className="header",
+        ),
+            html.Div(
+        children=[
+            html.Div(
+                children=[
+                    html.Div(children="paese", className="menu-title"),
+                    dcc.Dropdown(
+                        id="paese-filter",
+                        options=[
+                            {"label": paese, "value": paese}
+                            for paese in np.sort(data.paese.unique())
+                        ],
+                        value="Italy",
+                        clearable=False,
+                        className="dropdown",
+                    ),
+                ]
+            ),
+            html.Div(
+                children=[
+                    html.Div(children="anno", className="menu-title"),
+                    dcc.Dropdown(
+                        id="anno-filter",
+                        options=[
+                            {"label": anno, "value": anno}
+                            for anno in np.sort(data.year.unique())
+                        ],
+                        value="2018",
+                        clearable=False,
+                        className="dropdown",
+                    ),
+                ]
+            ),
+        ],
+        className="menu",
         ),
         html.Div(
             children=[
